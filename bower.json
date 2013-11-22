@@ -1,0 +1,10 @@
+{
+  "name": "angular-popover",
+  "version": "0.0.0",
+  "authors": [
+    "Sam Barnes <sam@avantrural.com>"
+  ],
+  "description": "Simple directive to control showing & hiding of popover elements",
+  "main": "popover.js",
+  "private": true
+}
