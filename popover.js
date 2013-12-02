@@ -3,7 +3,7 @@
 
 angular.module('ivPopover', [])
   
-  .directive('ivPopover', ['$document', function (document) {
+  .directive('ivPopover', ['$timeout', '$document', function ($timeout, $document) {
 
     return {
       restrict: 'A',
@@ -18,7 +18,7 @@ angular.module('ivPopover', [])
 
         function show () {
           elem.removeClass('ng-hide');
-          setTimeout(function () {
+          $timeout(function () {
             angular.element('html').on('click', clickHandler);
             angular.element('html').on('keydown', keyHandler );
           }, 500);
