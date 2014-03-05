@@ -1,17 +1,17 @@
 /* jshint es3: true */
 /* global angular: true */
 
-angular.module('ivPopover', [])
+angular.module('sbPopover', [])
   
-  .directive('ivPopover', ['$timeout', '$document', function ($timeout, $document) {
+  .directive('sbPopover', ['$timeout', '$document', function ($timeout, $document) {
 
     return {
       restrict: 'A',
 
       link: function(scope, elem, attrs) {
-        elem.addClass('iv-popover');
+        elem.addClass('sb-popover');
 
-        scope.$watch(attrs.ivPopoverShow, function (val) {
+        scope.$watch(attrs.sbPopoverShow, function (val) {
           if (val) show();
           else hide();
         });
@@ -25,7 +25,7 @@ angular.module('ivPopover', [])
         }
 
         function hide () {
-          scope[attrs.ivPopoverShow] = false;
+          scope[attrs.sbPopoverShow] = false;
           elem.addClass('ng-hide');
           angular.element('html').off('click', clickHandler);
           angular.element('html').off('keydown', keyHandler );
@@ -33,7 +33,7 @@ angular.module('ivPopover', [])
 
         // Close on click anywhere outside of the popover
         function clickHandler (event) {
-          if (!angular.element(event.target).closest('.iv-popover').length) {
+          if (!angular.element(event.target).closest('.sb-popover').length) {
             scope.$apply(function () {
               hide();
             });
