@@ -16,7 +16,7 @@
     "karma-phantomjs-launcher": "~0.1.2"
   },
   "scripts": {
-    "test": "node_modules/.bin/karma start test/karma-conf.js --single-run --browsers Firefox"
+    "test": "node_modules/.bin/karma start test/conf.js --single-run --browsers Firefox"
   },
   "repository": {
     "type": "git",
