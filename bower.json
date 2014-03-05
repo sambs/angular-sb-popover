@@ -1,10 +1,16 @@
 {
-  "name": "angular-popover",
+  "name": "angular-sb-popover",
   "version": "0.0.1",
   "authors": [
     "Sam Barnes <sam@avantrural.com>"
   ],
   "description": "Simple directive to control showing & hiding of popover elements",
   "main": "popover.js",
-  "private": true
+  "dependencies": {
+    "angular": "~1.2.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.0",
+    "jquery": "~1.10"
+  }
 }

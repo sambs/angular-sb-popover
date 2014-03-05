@@ -3,13 +3,12 @@
 
 angular.module('sbPopover', [])
   
-  .directive('sbPopover', ['$timeout', '$document', function ($timeout, $document) {
+  .directive('sbPopoverShow', ['$timeout', '$document', '$animate', function ($timeout, $document, $animate) {
 
     return {
       restrict: 'A',
 
       link: function(scope, elem, attrs) {
-        elem.addClass('sb-popover');
 
         scope.$watch(attrs.sbPopoverShow, function (val) {
           if (val) show();
@@ -17,32 +16,33 @@ angular.module('sbPopover', [])
         });
 
         function show () {
-          elem.removeClass('ng-hide');
+          $animate.removeClass(elem, 'ng-hide');
           $timeout(function () {
-            angular.element('html').on('click', clickHandler);
-            angular.element('html').on('keydown', keyHandler );
+            $document.on('click', clickHandler);
+            $document.on('keypress', keyHandler );
           }, 500);
         }
 
         function hide () {
           scope[attrs.sbPopoverShow] = false;
-          elem.addClass('ng-hide');
-          angular.element('html').off('click', clickHandler);
-          angular.element('html').off('keydown', keyHandler );
+          $animate.addClass(elem, 'ng-hide');
+          $document.off('click', clickHandler);
+          $document.off('keypress', keyHandler );
         }
 
         // Close on click anywhere outside of the popover
         function clickHandler (event) {
-          if (!angular.element(event.target).closest('.sb-popover').length) {
-            scope.$apply(function () {
-              hide();
-            });
+          var node = event.target;
+          while (node) {
+            if (node === elem[0]) return;
+            node = node.parentNode;
           }
+          hide();
         }
         
         // Close on escape or tab key press
         function keyHandler (event) {
-          if (~[27, 9].indexOf(event.keyCode)) {
+          if (~[27, 9].indexOf(event.which)) {
             scope.$apply(function () {
               hide();
             });
