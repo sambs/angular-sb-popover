@@ -24,7 +24,7 @@ describe('sbPopover directive', function () {
           esc: 27,
         }[key];
         if (!code) throw new Error('Unknown key: '+key);
-        $document.trigger($.Event('keypress', { which: code }));
+        $document.trigger($.Event('keydown', { which: code }));
       };
     };
   }));
