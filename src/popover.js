@@ -17,16 +17,15 @@ angular.module('sbPopover', [])
       link: function(scope, elem, attrs) {
 
         scope.$watch('show', function (val) {
-          console.log(val);
           if (val) {
             // Dont add handlers straight away else the event
             // that opened the popover may close it as well
             $timeout(function () {
-              $document.on('click', clickHandler);
+              $document.on('mousedown', clickHandler);
               $document.on('keydown', keyHandler );
             }, 500);
           } else {
-            $document.off('click', clickHandler);
+            $document.off('mousedown', clickHandler);
             $document.off('keydown', keyHandler );
           }
         });
