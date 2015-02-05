@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Popover Demo</title>
+  <style>
+    body {
+      padding: 20px;
+    }
+    .popover {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="src/popover.js"></script>
+  <script>
+    angular.module('app', ['sbPopover']).
+      controller('Controller', function ($scope) {
+      });
+  </script>
+</head>
+<body ng-app="app">
+  <div ng-controller="Controller">
+    <label>
+      <input type="checkbox" ng-model="doit">
+      Show popover
+    </label>
+    <div class="popover" sb-popover-show="doit">
+      <p>In my popover</p>
+    </div>
+  </div>
+</body>
+</html>

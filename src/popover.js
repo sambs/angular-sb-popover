@@ -7,29 +7,29 @@ angular.module('sbPopover', [])
 
     return {
       restrict: 'A',
+      scope: {
+        show: '=sbPopoverShow'
+      },
+      template: '<div ng-show="show" ng-transclude></div>',
+      transclude: true,
+      replace: true,
 
       link: function(scope, elem, attrs) {
 
-        scope.$watch(attrs.sbPopoverShow, function (val) {
-          if (val) show();
-          else hide();
+        scope.$watch('show', function (val) {
+          console.log(val);
+          if (val) {
+            // Dont add handlers straight away else the event
+            // that opened the popover may close it as well
+            $timeout(function () {
+              $document.on('click', clickHandler);
+              $document.on('keydown', keyHandler );
+            }, 500);
+          } else {
+            $document.off('click', clickHandler);
+            $document.off('keydown', keyHandler );
+          }
         });
-
-        function show () {
-          $animate.removeClass(elem, 'ng-hide');
-          // Dont add handlers straight away else the event
-          // that opened the popover may close it as well
-          $timeout(function () {
-            $document.on('click', clickHandler);
-            $document.on('keydown', keyHandler );
-          }, 500);
-        }
-
-        function hide () {
-          $animate.addClass(elem, 'ng-hide');
-          $document.off('click', clickHandler);
-          $document.off('keydown', keyHandler );
-        }
 
         // Close on click anywhere outside of the popover
         function clickHandler (event) {
@@ -39,7 +39,7 @@ angular.module('sbPopover', [])
             node = node.parentNode;
           }
           scope.$apply(function () {
-            scope[attrs.sbPopoverShow] = false;
+            scope.show = false;
           });
         }
         
@@ -47,7 +47,7 @@ angular.module('sbPopover', [])
         function keyHandler (event) {
           if (!~[27, 9].indexOf(event.which)) return;
           scope.$apply(function () {
-            scope[attrs.sbPopoverShow] = false;
+            scope.show = false;
           });
         }
       }

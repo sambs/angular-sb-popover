@@ -3,6 +3,9 @@
   "version": "0.1.1",
   "description": "Input selection from a dropdown list",
   "main": "src/dropdown-select.js",
+  "dependencies": {
+    "angular": ">1.2.0",
+  },
   "devDependencies": {
     "karma": "~0.10.9",
     "karma-script-launcher": "~0.1.0",
